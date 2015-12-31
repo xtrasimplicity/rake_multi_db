@@ -3,27 +3,31 @@ require 'open3'
 namespace :alldb do
   environments = ["test", "development"]
 
-  desc "TODO"
+  desc "Drops all Test & Development databases"
   task drop: :environment do
     environments.each do |env_name|
       drop env_name
     end
   end
 
-  desc "TODO"
+  desc "Migrates all Test & Development databases"
   task migrate: :environment do
    environments.each do |env_name|
       migrate env_name
     end
-
-
   end
 
-  desc "TODO"
+  desc "Drops and then Migrates all Test & Development databases"
   task redo: :environment do
     environments.each do |env_name|
       drop env_name
       migrate env_name
+    end
+  end
+
+  task reset: :environment do
+    environments.each do |env_name|
+      reset env_name
     end
   end
 
@@ -38,6 +42,12 @@ namespace :alldb do
     puts "Migrating #{env_name.capitalize} Database"
 
     execute_command("rake db:migrate RAILS_ENV=#{env_name}")
+  end
+
+  def reset(env_name)
+    puts "Resetting #{env_name.capitalize} Database"
+
+    execute_command("rake db:reset RAILS_ENV=#{env_name}")
   end
 
 
