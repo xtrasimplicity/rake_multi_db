@@ -23,6 +23,10 @@ To drop and migrate all Test & Development databases:
 
 ```rake alldb:redo```
 
+To reset all Test & Development databases
+
+```rake alldb:reset```
+
 ## Things to keep in mind
 1. The value specified by ```RAILS_ENV``` is ignored entirely. 
 2. The environments that are affected are currently defined in the top of the rake file. This should be re-structured (see To Do item 1, below)
