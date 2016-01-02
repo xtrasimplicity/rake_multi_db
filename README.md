@@ -57,9 +57,9 @@ To reset all Test & Development databases
 ## Things to keep in mind
 1. The value specified by ```RAILS_ENV``` is ignored entirely.
 2. When no environments are passed through to this rake task, it will automatically use both ```test``` and ```development``` environments. 
-
 i.e. running ```rake multi_db:drop``` will drop ***all*** ```test``` and ```development``` databases. If you only want to drop, say, the test databases, specify an environment, as follows: 
-```rake multi_db:drop environments=test
+```rake multi_db:drop environments=test```
+
 3. By default, when an error is encountered, the user will be asked to confirm whether they would like to continue. If you want to forcefully progress, and suppress all prompts, execute the rake task using the ```force``` parameter
 i.e. ```rake multi_db:drop environments=test,development force=true```
 
