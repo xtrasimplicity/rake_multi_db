@@ -2,7 +2,6 @@ require 'open3'
 
 namespace :multi_db do
  environments = ENV['environments'].nil? ? ['test', 'development'] : ENV['environments'].split(',')
- force = ENV['force'].nil? ? false : ENV['force'] 
 
  desc "Drops all specified environment databases"
   task :drop do
@@ -37,7 +36,9 @@ namespace :multi_db do
 
  # Helper methods #
  def prompt_user(message)
-  # Don't show a message, if the force param was passed 
+  # Don't show a message, if the force param was passed
+  force = ENV['force'].nil? ? false : ENV['force'] 
+
   return true if force
 
   puts "#{message} (y|n|yes|no)"
