@@ -1,5 +1,5 @@
-# rake_all_db_helper
-Simple interactive rake task to automatically drop/migrate/drop &amp; migrate test and development databases
+# rake_multi_db_helper
+Simple interactive rake task to automatically drop/migrate/drop &amp; migrate/reset multiple databases
 
 ## Installation
 Simply add the rake file to one of the following locations:
@@ -8,31 +8,60 @@ Simply add the rake file to one of the following locations:
 2. Your ActiveRecord gem location (found using _rake -W db:drop_)
 
 ## Usage
-Simply run this rake task as you would any other rake task, from your rails project directory, using the _alldb:_ prefix.
-i.e.
+Simply run this rake task as you would any other rake task, from your rails project directory, using the _multi_db:_ prefix and the appropriate tasks and parameters.
 
-To drop all Test & Development databases:
+### Parameters
+The following parameters are able to be invoked
 
-```rake alldb:drop```
+| Parameter        | Default Value           | Comment  | Example |
+| ------------- |:-------------:| -----:|----------:|
+| environments      | test,development | A comma-seperated string of environments to work with. | ```rake multi_db:drop environments=test,development```|
+| force      | false      |  Whether to forcefully progress if an error occurs,<br /> without prompting the user. | ```rake multi_db:drop force=true``` |
+
+The following tasks are able to be used
+
+| Task | Purpose                                    |
+|--------:|-------------------------------------------:|
+| drop   | Drops the specified environment's database.|
+| migrate| Migrates the specified environment's database from the relevant migration file.|
+| redo   | Drops and migrates the specified environment's database.|
+| reset  | Resets all table data for the specified environment.|
+
+Arguments are passed as follows:
+```rake multi_db:{Task} {parameter}={parameter_value}```
+
+i.e. 
+
+To drop specified environment databases:
+
+```rake multi_db:drop environments={environments_to_drop_comma_seperated}```
+
+To drop test and development databases:
+
+```rake multi_db:drop``` or ```rake multi_db:drop environments=test,development```
 
 To migrate all Test & Development databases:
 
-```rake alldb:migrate```
+```rake multi_db:migrate``` or ```rake multi_db:migrate environments=test,development```
+
 
 To drop and migrate all Test & Development databases:
 
-```rake alldb:redo```
+```rake multi_db:redo``` or ```rake multi_db:redo environments=test,development```
 
 To reset all Test & Development databases
 
-```rake alldb:reset```
+```rake multi_db:reset``` or ```rake multi_db:reset environments=test,development```
+
 
 ## Things to keep in mind
-1. The value specified by ```RAILS_ENV``` is ignored entirely. 
-2. The environments that are affected are currently defined in the top of the rake file. This should be re-structured (see To Do item 1, below)
+1. The value specified by ```RAILS_ENV``` is ignored entirely.
+2. When no environments are passed through to this rake task, it will automatically use both ```test``` and ```development``` environments. 
 
-## To Do
-1. Add the ability to specify rails environments prior to user execution, without setting the RAILS_ENV variable.
+i.e. running ```rake multi_db:drop``` will drop ***all*** ```test``` and ```development``` databases. If you only want to drop, say, the test databases, specify an environment, as follows: 
+```rake multi_db:drop environments=test
+3. By default, when an error is encountered, the user will be asked to confirm whether they would like to continue. If you want to forcefully progress, and suppress all prompts, execute the rake task using the ```force``` parameter
+i.e. ```rake multi_db:drop environments=test,development force=true```
 
 ## Contributing
 
