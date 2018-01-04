@@ -31,6 +31,13 @@ namespace :multi_db do
       reset env_name
     end
   end
+
+  desc "Executes the seed script to populate the specified environment databases"
+  task :seed do
+    environments.each do |env_name|
+      seed env_name
+    end
+  end
  
 
 
@@ -74,6 +81,12 @@ namespace :multi_db do
     puts "Resetting #{env_name.capitalize} Database"
 
     execute_command("rake db:reset RAILS_ENV=#{env_name}")
+  end
+
+  def seed(env_name)
+    puts "Seeding #{env_name.capitalize} Database"
+
+    execute_command("rake db:seed RAILS_ENV=#{env_name}")
   end
 
   def execute_command(command)
