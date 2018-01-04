@@ -38,18 +38,18 @@ namespace :multi_db do
       seed env_name
     end
   end
- 
+
 
 
  # Helper methods #
  def prompt_user(message)
   # Don't show a message, if the force param was passed
-  force = ENV['force'].nil? ? false : ENV['force'] 
+  force = ENV['force'].nil? ? false : ENV['force']
 
   return true if force
 
   puts "#{message} (y|n|yes|no)"
-  
+
   # parse the response
   resp = STDIN.gets.strip
 
