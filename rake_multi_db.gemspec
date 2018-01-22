@@ -5,7 +5,7 @@ $:.unshift lib unless $:.include?(lib)
 require 'rake_multi_db/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "rake-multi-db"
+  spec.name          = "rake_multi_db"
   spec.version       = RakeMultiDB::VERSION
   spec.authors       = ["Andrew Walter"]
   spec.email         = "andrew@xtrasimplicity.com"

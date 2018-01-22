@@ -2,8 +2,7 @@
 Simple interactive rake task to automatically drop/migrate/drop &amp; migrate/reset multiple databases
 
 ## Installation
-1. Add `gem 'rake-multi-db', '~> 0.0'`to your application's Gemfile.
-2. Add 'require 'rake_multi_db' to the top of your `Rakefile`
+1. Add `gem 'rake_multi_db', '~> 0.0'`to your application's Gemfile.
 
 ## Usage
 Simply run this rake task as you would any other rake task, from your rails project directory, using the _multi_db:_ prefix and the appropriate tasks and parameters.
