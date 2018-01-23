@@ -1,4 +1,4 @@
-# rake_multi_db_helper
+# rake_multi_db
 Simple interactive rake task to automatically drop/migrate/drop &amp; migrate/reset multiple databases
 
 ## Installation
